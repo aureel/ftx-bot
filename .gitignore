@@ -1,0 +1,6 @@
+.env
+.vscode
+.tsbuildcache
+dist
+coverage
+node_modules
