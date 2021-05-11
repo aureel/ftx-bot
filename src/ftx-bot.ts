@@ -44,7 +44,7 @@ async function _ftxFillsHandler(order: FTXOrder): Promise<void> {
 
 function _formatFTXOrders(orders: FTXOrder[]): string[] {
   return orders.map((order) => {
-    const orderType = order.orderType != null ? `${order.type}${order.orderType}` : order.type;
+    const orderType = order.orderType != null ? `${order.type} ${order.orderType}` : order.type;
     const price = order.triggerPrice != null ? order.triggerPrice : order.price;
     const [baseCurrency, quoteCurrency] = order.market.split("/");
 
