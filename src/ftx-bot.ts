@@ -35,7 +35,7 @@ async function _ftxFillsHandler(order: FTXOrder): Promise<void> {
     const formattedOrders = _formatFTXOrders([order]);
     await sendMessage({
       chatId: process.env.TELEGRAM_CHAT_ID!,
-      message: formattedOrders.join("\n"),
+      message: `The following order just filled:\n${formattedOrders.join("\n")}`,
     });
   } catch (err) {
     _handleError(err);
