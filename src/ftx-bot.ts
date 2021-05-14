@@ -10,14 +10,14 @@ function initFTXBot(): void {
 
 async function _telegramMessageHandler(message: TelegramMessage): Promise<any> {
   try {
-    if (/get orders/i.test(message.text)) {
+    if (/getorders/i.test(message.text)) {
       const openOrders = await getOpenOrders();
       const formattedOrders = _formatFTXOrders(openOrders);
       return sendMessage({
         chatId: process.env.TELEGRAM_CHAT_ID!,
         message: `You have <b>${
           openOrders.length
-        }</b> order(s) currently opened:\n${formattedOrders.join("\n")}`,
+        }</b> order(s) currently opened\n${formattedOrders.join("\n")}`,
       });
     }
 
