@@ -6,7 +6,7 @@ Quick bot to receive fills notification + open orders through Telegram for the
 👷 Note: this is a quick hacky solution to get fills notification through telegram, would need more
 work to make it cleaner.
 
-##Examples:
+### Examples:
 
 Telegram command: `/getorders` 
 
