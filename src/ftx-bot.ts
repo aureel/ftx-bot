@@ -46,10 +46,29 @@ function _formatFTXOrders(orders: FTXOrder[]): string[] {
   return orders.map((order) => {
     const orderType = order.orderType != null ? `${order.type} ${order.orderType}` : order.type;
     const price = order.triggerPrice != null ? order.triggerPrice : order.price;
-    const [baseCurrency, quoteCurrency] = order.market.split("/");
+    const { baseCurrency, quoteCurrency } = _getBaseAndQuoteCurrencies(order.market);
 
     return `[${order.market}] - ${orderType} ${order.side} ${order.size} ${baseCurrency} @ ${price} ${quoteCurrency}`;
   });
+}
+
+function _getBaseAndQuoteCurrencies(
+  market: string
+): { baseCurrency: string; quoteCurrency: string } {
+  // for ie BTC/USD
+  if (market.includes("/")) {
+    const [baseCurrency, quoteCurrency] = market.split("/");
+    return { baseCurrency, quoteCurrency };
+  }
+
+  // for ie TSLA-0924 or BTC-PERP
+  if (market.includes("-")) {
+    const [baseCurrency] = market.split("-");
+    return { baseCurrency, quoteCurrency: "USD" };
+  }
+
+  // for ie TRUMP2024
+  return { baseCurrency: market, quoteCurrency: "USD" };
 }
 
 function _handleError(err) {
